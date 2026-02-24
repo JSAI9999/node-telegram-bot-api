@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout from git') {
+            steps {
+             checkout scmGit(branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[credentialsId: 'akram', url: 'https://github.com/akramsyed8046/simple-node-js-react-npm-app.git']])
+            }
+        }
+        stage('Install') {
+            steps {
+                sh 'npm install'
+            }
+        }
+        stage('run script') {
+            steps {
+                sh 'npm run build'
+            }
+        }
+        
+    }
+}
